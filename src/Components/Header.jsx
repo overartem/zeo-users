@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -9,9 +10,16 @@ import {
 	InputBase,
 	Box,
 	IconButton,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemText,
 } from '@mui/material';
 
-const navItems = ['Home', 'Users'];
+const navItems = [
+	{ title: 'Home', url: '/' },
+	{ title: 'Users', url: '/users' },
+];
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
@@ -86,25 +94,36 @@ export const Header = () => {
 							inputProps={{ 'aria-label': 'search' }}
 						/>
 					</Search>
-					<div>
-						<IconButton
-							size='large'
-							aria-label='account of current user'
-							aria-controls='menu-appbar'
-							aria-haspopup='true'
-							color='inherit'
-							sx={{ borderRadius: '10px' }}
+					<List sx={{ display: 'flex' }}>
+						{navItems.map(item => (
+							<ListItem key={item.title} disablePadding>
+								<ListItemButton
+									component={Link}
+									to={item.url}
+									sx={{ textAlign: 'center' }}
+								>
+									<ListItemText primary={item.title} />
+								</ListItemButton>
+							</ListItem>
+						))}
+					</List>
+					<IconButton
+						size='large'
+						aria-label='account of current user'
+						aria-controls='menu-appbar'
+						aria-haspopup='true'
+						color='inherit'
+						sx={{ borderRadius: '10px' }}
+					>
+						<AccountCircle />
+						<Typography
+							variant='button'
+							noWrap
+							sx={{ display: 'block', paddingLeft: '10px' }}
 						>
-							<AccountCircle />
-							<Typography
-								variant='button'
-								noWrap
-								sx={{ display: 'block', paddingLeft: '10px' }}
-							>
-								Add New User
-							</Typography>
-						</IconButton>
-					</div>
+							Add User
+						</Typography>
+					</IconButton>
 				</Toolbar>
 			</AppBar>
 		</Box>
