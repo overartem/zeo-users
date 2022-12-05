@@ -1,18 +1,10 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { fetchUsers } from './Redux/Slices/userSlice';
 import Layout from './Components/Layout';
 import { NotFound } from './Pages/NotFound';
 import { Users } from './Pages/Users';
 import { Home } from './Pages/Home';
 
 function App() {
-	const dispatch = useDispatch();
-	const { status } = useSelector(state => state.users);
-	useEffect(() => {
-		dispatch(fetchUsers());
-	}, []);
 	return (
 		<>
 			<Routes>

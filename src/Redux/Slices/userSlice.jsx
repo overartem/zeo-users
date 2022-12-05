@@ -14,6 +14,8 @@ export const fetchUsers = createAsyncThunk(
 
 const initialState = {
 	userData: [],
+	sortedUserData: [],
+	searchValue: '',
 	status: 'loading', //success | loading | error
 };
 
@@ -21,8 +23,15 @@ export const userSlice = createSlice({
 	name: 'users',
 	initialState,
 	reducers: {
-		setUsers: (state, action) => {
-			state.userData = action.payload;
+		setSearchValue(state, action) {
+			state.searchValue = action.payload;
+		},
+		getSortedUsers(state) {
+			state.sortedUserData = state.userData.filter(item => {
+				return item.name.toLowerCase().includes(state.searchValue.toLowerCase())
+					? true
+					: false;
+			});
 		},
 	},
 	extraReducers: {
@@ -33,6 +42,7 @@ export const userSlice = createSlice({
 		[fetchUsers.fulfilled]: (state, action) => {
 			state.status = 'success';
 			state.userData = action.payload;
+			state.sortedUserData = state.userData;
 		},
 		[fetchUsers.rejected]: state => {
 			state.status = 'error';
@@ -41,6 +51,6 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { setUsers } = userSlice.actions;
+export const { setSearchValue, getSortedUsers } = userSlice.actions;
 
 export default userSlice.reducer;
