@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
 import {
 	AppBar,
@@ -19,12 +19,6 @@ const navItems = [
 ];
 
 export const Header = () => {
-	const [anchorEl, setAnchorEl] = React.useState(null);
-
-	const handleAddUser = event => {
-		setAnchorEl(event.currentTarget);
-	};
-
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static'>
@@ -40,9 +34,9 @@ export const Header = () => {
 						{navItems.map(item => (
 							<ListItem key={item.title} disablePadding>
 								<ListItemButton
-									component={Link}
+									component={NavLink}
 									to={item.url}
-									sx={{ textAlign: 'center' }}
+									sx={[{ '&.active': { color: 'black' }, textAlign: 'center' }]}
 								>
 									<ListItemText primary={item.title} />
 								</ListItemButton>

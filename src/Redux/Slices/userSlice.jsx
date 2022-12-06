@@ -6,7 +6,6 @@ const baseURL = 'https://jsonplaceholder.typicode.com/users';
 export const fetchUsers = createAsyncThunk(
 	'users/fetchUsersStatus',
 	async () => {
-		// const { sortBy, order, category, currentPage } = params;
 		const { data } = await axios.get(`${baseURL}`);
 		return data;
 	}
@@ -16,6 +15,7 @@ const initialState = {
 	userData: [],
 	sortedUserData: [],
 	searchValue: '',
+	countUser: 0,
 	status: 'loading', //success | loading | error
 };
 
@@ -43,6 +43,7 @@ export const userSlice = createSlice({
 			state.status = 'success';
 			state.userData = action.payload;
 			state.sortedUserData = state.userData;
+			state.countUser = state.userData.length;
 		},
 		[fetchUsers.rejected]: state => {
 			state.status = 'error';

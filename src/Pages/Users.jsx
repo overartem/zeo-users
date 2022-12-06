@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
 	fetchUsers,
 	setSearchValue,
@@ -105,8 +106,12 @@ export const Users = () => {
 										sx={[{ '&:hover': { cursor: 'pointer' } }]}
 									>
 										<TableCell align='left'>{user.id}</TableCell>
-										<TableCell align='left'>{user.name}</TableCell>
-										<TableCell align='left'>{user.username}</TableCell>
+										<TableCell align='left'>
+											<Link to={'user/' + user.id}>{user.name}</Link>
+										</TableCell>
+										<TableCell align='left'>
+											<Link to={'user/' + user.id}>{user.username}</Link>
+										</TableCell>
 									</TableRow>
 								))
 							) : (
