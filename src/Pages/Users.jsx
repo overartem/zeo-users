@@ -6,6 +6,7 @@ import {
 	fetchUsers,
 	setSearchValue,
 	getSortedUsers,
+	updatedUserData,
 } from '../Redux/Slices/userSlice';
 import debounce from 'lodash.debounce';
 
@@ -29,13 +30,17 @@ import Paper from '@mui/material/Paper';
 
 export const Users = () => {
 	const dispatch = useDispatch();
-	const { status, searchValue, sortedUserData } = useSelector(
+	const { status, searchValue, sortedUserData, newUserData } = useSelector(
 		state => state.users
 	);
 	const inputSearchRef = useRef();
 	const [value, setValue] = useState('');
 	useEffect(() => {
-		dispatch(fetchUsers());
+		if (newUserData.length) {
+			dispatch(updatedUserData());
+		} else {
+			dispatch(fetchUsers());
+		}
 	}, []);
 
 	useEffect(() => {

@@ -15,12 +15,13 @@ export const User = () => {
 			dispatch(fetchUsers());
 		}
 	}, []);
+	const indexUser = userData.findIndex(elem => elem.id === Number(id));
 
 	return (
 		<Container maxWidth='sm'>
 			<Card sx={{ mt: 10 }}>
 				{userData.length && (
-					<UserCart idUrl={Number(id)} data={userData[id - 1]} />
+					<UserCart idUrl={Number(id)} data={userData[indexUser]} />
 				)}
 			</Card>
 		</Container>

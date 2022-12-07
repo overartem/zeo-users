@@ -1,0 +1,28 @@
+.form {
+	display: flex;
+	flex-wrap: wrap;
+}
+.button {
+	margin: 8px;
+	width: 150px;
+	max-height: 40px;
+}
+.rightIcon {
+	margin-left: 8px;
+}
+
+.wrapper_popup {
+	padding: 24px 16px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400;
+	background-color: #fff;
+	border: 2px solid #000;
+	box-shadow: 24;
+}
+.textField {
+	margin: 0 8px !important;
+	width: 30%;
+}

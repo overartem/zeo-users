@@ -14,6 +14,7 @@ export const fetchUsers = createAsyncThunk(
 const initialState = {
 	userData: [],
 	sortedUserData: [],
+	newUserData: [],
 	searchValue: '',
 	countUser: 0,
 	status: 'loading', //success | loading | error
@@ -25,6 +26,15 @@ export const userSlice = createSlice({
 	reducers: {
 		setSearchValue(state, action) {
 			state.searchValue = action.payload;
+		},
+		removeUser(state, action) {
+			state.userData.splice(action.payload, 1);
+			state.newUserData = state.userData;
+			state.countUser = state.newUserData[state.newUserData.length - 1].id;
+		},
+		updatedUserData(state) {
+			state.userData = state.newUserData;
+			state.countUser = state.userData[state.userData.length - 1].id;
 		},
 		getSortedUsers(state) {
 			state.sortedUserData = state.userData.filter(item => {
@@ -52,6 +62,7 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { setSearchValue, getSortedUsers } = userSlice.actions;
+export const { setSearchValue, getSortedUsers, removeUser, updatedUserData } =
+	userSlice.actions;
 
 export default userSlice.reducer;
